@@ -1,0 +1,22 @@
+{
+  "name": "serve",
+  "version": "1.0.0",
+  "description": "minimal static server",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:caub/serve.git"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "caub",
+  "license": "ISC",
+  "bin": {
+    "serve": "./bin/index.js"
+  }
+}
