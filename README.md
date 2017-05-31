@@ -1,7 +1,7 @@
-# serve
-basic static server, like http-server
+# fserve
+basic static file server, like http-server
 
-`npm i -g github:caub/serve`
+`npm i -g fserve`
 
 usage: 
 

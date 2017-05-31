@@ -1,5 +1,5 @@
 {
-  "name": "serve",
+  "name": "fserve",
   "version": "1.0.0",
   "description": "minimal static server",
   "main": "index.js",
