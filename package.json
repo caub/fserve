@@ -1,6 +1,6 @@
 {
   "name": "fserve",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "minimal static server",
   "main": "index.js",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "git@github.com:caub/serve.git"
   },
   "dependencies": {
-    "serve-static": "^1.11.1"
+    "serve-static": "^1.12.4"
   },
   "devDependencies": {},
   "scripts": {

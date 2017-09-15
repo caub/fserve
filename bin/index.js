@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-const http = require('http');
+const fs = require('fs');
+const path = require('path');
 const serveStatic = require('serve-static');
 
 const serve = serveStatic('.', {extensions: ['html']});
@@ -10,16 +11,25 @@ const errhandler = (req, res) => err => {
 	res.end();
 }
 
+const defaultDir = __dirname+'/../';
+const arg1 = process.argv[2] || '';
+const arg2 = process.argv[3] || '';
 
-const server = http.createServer((req, res) => {
-	serve(req, res, errhandler(req, res))
+const [sec, PORT] = arg1.startsWith('-s') ? [arg1.slice(3)||defaultDir, parseInt(arg2)||3000] :
+						[arg2.startsWith('-s') ? arg2.slice(3)||defaultDir : null, parseInt(arg1)||3000];
+
+const proto = sec ? require('https') : require('http');
+
+const createServer = cb => sec ? require('https').createServer({
+	key: fs.readFileSync(path.join(sec, 'key.pem')),
+	cert: fs.readFileSync(path.join(sec, 'cert.pem'))
+}, cb) : require('http').createServer(cb);
+
+const server = createServer((req, res) => {
+	serve(req, res, errhandler(req, res));
 });
 
-const PORT = parseInt(process.argv[2])||3000;
-
 server.listen(PORT);
-
-
 
 process.on('exit', () => { server.close(); process.exit(); });
 
@@ -28,6 +38,6 @@ process.on('SIGINT', () => { server.close(); process.exit(); });
 
 
 process.stdin.resume(); // hang console until it's closed
-console.log('listen http://localhost:%d', PORT);
+console.log(`listen http${sec?'s':''}://localhost:%d`, PORT);
 
 
